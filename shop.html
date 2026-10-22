@@ -53,3 +53,34 @@
             </nav>
         </div>
     </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-12">
+
+        <h1 class="text-center font-title text-4xl font-bold tracking-widest">BOOSTER SHOP</h1>
+        <p class="mx-auto mt-4 max-w-md text-center">Choose your boosters and add them to your cart.</p>
+
+        <div class="mt-10 grid gap-8 lg:grid-cols-3">
+
+            <section class="grid gap-6 sm:grid-cols-2 lg:col-span-2" aria-label="Boosters">
+
+                <article data-name="Beginner Pack" data-price="4.99"
+                    class="flex flex-col items-center rounded-lg border border-bone/20 bg-blue-900 p-5 text-center">
+                    <h2 class="font-title text-lg font-bold">Beginner Pack</h2>
+                    <img src="images/pack1.jpg" alt="Beginner Pack picture"
+                        class="my-4 h-64 max-w-full rounded-md object-contain drop-shadow-xl">
+                    <p class="text-sm">A pack designed for new players, with a mix of common cards and a few higher
+                        rarity cards.</p>
+                    <p class="mt-2 text-sm italic">5 cards: heroes, monsters, minions, spells</p>
+                    <p class="mt-3 font-title text-2xl font-bold">4.99 €</p>
+                    <div class="mt-3 flex items-end gap-3">
+                        <div>
+                            <label class="block text-sm">Quantity
+                                <input type="number" min="1" max="10" value="1"
+                                    class="block w-20 rounded border border-bone/50 bg-void px-2 py-2">
+                            </label>
+                        </div>
+                        <button type="button"
+                            class="add-btn rounded-md bg-blue-800 px-4 py-2 font-bold text-white hover:bg-blue-700">Add
+                            to cart</button>
+                    </div>
+                </article>

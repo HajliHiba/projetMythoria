@@ -155,10 +155,8 @@
             <aside class="h-fit rounded-lg border border-bone/20 bg-blue-900 p-5 lg:sticky lg:top-6"
                 aria-labelledby="cart-title">
                 <h2 id="cart-title" class="font-title text-2xl font-bold">My cart</h2>
-
                 <p id="cart-empty" class="mt-4">Your cart is empty.</p>
                 <ul id="cart-list" class="mt-2"></ul>
-
                 <p class="mt-4 flex justify-between border-t border-bone/30 pt-4 text-lg">
                     <span>Total</span>
                     <strong id="cart-total" aria-live="polite">0.00 €</strong>
@@ -174,7 +172,6 @@
                 <p id="message" class="mt-4 text-sm" role="status"></p>
                 <p class="mt-2 text-xs opacity-70">Simulation only: no real payment.</p>
             </aside>
-
         </div>
     </main>
 
@@ -201,12 +198,8 @@
             </div>
         </div>
     </footer>
-
     <script>
-    
-    
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
         const cartList = document.getElementById("cart-list");
         const cartTotal = document.getElementById("cart-total");
         const cartEmpty = document.getElementById("cart-empty");
@@ -216,7 +209,6 @@
             localStorage.setItem("cart", JSON.stringify(cart));
             showCart();
         }
-
         function showCart() {
             cartList.innerHTML = "";
             let total = 0;
@@ -233,30 +225,25 @@
                             class="remove-btn text-sm text-red-300 underline">Remove</button>
                     </li>`;
             });
-
             cartTotal.textContent = total.toFixed(2) + " €";
             cartEmpty.hidden = cart.length > 0;
         }
-
         document.querySelectorAll(".add-btn").forEach(function (button) {
             button.addEventListener("click", function () {
                 const card = button.closest("article");
                 const name = card.dataset.name;
                 const price = Number(card.dataset.price);
                 const quantity = Number(card.querySelector("input").value);
-
                 if (quantity < 1 || isNaN(quantity)) {
                     message.textContent = "Please choose a quantity of at least 1.";
                     return;
                 }
-
                 const line = cart.find(function (item) { return item.name === name; });
                 if (line) {
                     line.quantity = line.quantity + quantity;
                 } else {
                     cart.push({ name: name, price: price, quantity: quantity });
                 }
-
                 message.textContent = quantity + " × " + name + " added to your cart.";
                 saveCart();
             });
@@ -268,7 +255,6 @@
                 saveCart();
             }
         });
-
         document.getElementById("clear-btn").addEventListener("click", function () {
             cart = [];
             message.textContent = "";
@@ -285,9 +271,7 @@
             saveCart();
             message.textContent = "Order confirmed (" + total + "). This is a simulation, thank you!";
         });
-
         showCart();
     </script>
 </body>
-
 </html>

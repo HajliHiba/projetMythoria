@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <style type="text/tailwindcss">
-        @theme {
+        @theme{
             --color-void: #0b0d14;
             --color-bone: #e8e4d8;
             --font-title: "Cinzel", Georgia, serif;
@@ -35,6 +35,11 @@
                 <img src="images/logo.jpg" alt="" width="48" height="48" class="h-12 w-auto">
                 HOLLOW KNIGHT
             </a>
+            <input type="checkbox" id="menu-toggle" class="peer sr-only">
+            <label for="menu-toggle"
+                class="cursor-pointer rounded border border-bone/60 px-3 py-2 text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-bone md:hidden">
+                Menu
+            </label>
 
             <nav aria-label="Main navigation"
                 class="hidden w-full flex-col gap-1 peer-checked:flex md:flex md:w-auto md:flex-row md:gap-6">
@@ -46,12 +51,14 @@
             </nav>
         </div>
     </header>
-    <main class="mx-auto max-w-6xl px-4 py-12 ">
-        <h1 class="font-title text-5xl font-bold tracking-widest flex items-center justify-center">HOLLOW KNIGHT</h1>
-        <p class="mt-4 text-xl italic sm:text-2xl flex items-center justify-center ">Descende into the dark.</p>
-        <p class="mt-4 max-w-md ml-[360px]">Open boosters, discover monsters, heroes and all kinds of spells, then
-            create your deck, and conquer the darkness.</p>
-        <div class="flex justify-between h-100 mt-[30px]">
+    <main class="mx-auto  px-4 py-12">
+        <section class="text-center">
+            <h1 class="font-title text-5xl font-bold tracking-widest">HOLLOW KNIGHT</h1>
+            <p class="mt-4 text-xl italic sm:text-2xl">Descend into the dark.</p>
+            <p class="mx-auto mt-4 max-w-md">Open boosters, discover monsters, heroes and all kinds of spells, then
+                create your deck, and conquer the darkness.</p>
+        </section>
+        <div class="flex justify-between h-100 mt-[30px] m-50">
             <div>
                 <img class="w-auto h-full" src="images/wanderer.jpg" alt="hero picture">
                 <h2 class="text-center justify-center font-bold italic mt-2">heroes</h2>
@@ -70,8 +77,35 @@
             <a href="grimoire.html" class="rounded-md bg-blue-800 text-black h-10 py-2 px-10 ">the grimoire</a>
         </div>
         <div>
-            <p class="mt-4 text-xl italic sm:text-2xl flex items-center justify-center">TYPES OF BOOSTERS</p>
-
+            <div>
+                <p class="mt-[65px] text-xl italic sm:text-2xl flex items-center justify-center">TYPES OF BOOSTERS</p>
+            </div>
+            <div class="flex justify-around bg-blue-900 p-10">
+                <div>
+                    <h2 class="text-center justify-center font-bold italic mt-2">Beginner Pack</h2>
+                    <img src="images/pack1.jpg" alt="Beginner Pack picture" class="w-auto h-2/3">
+                    <p class="text-[40px]">A pack designed for new players <br>, containing a mix of common cards and a few
+                        higher rarity cards.
+                    </p>
+                </div>
+                <div>
+                    <h2 class="text-center justify-center font-bold italic mt-2">Summoning of the Legends</h2>
+                    <img src="images/pack2.jpg" alt="Summoning of the Legends picture" class="w-auto h-2/3">
+                    <p>A premium pack offering a better chance of getting rare, epic, or legendary cards.</p>
+                </div>
+                <div>
+                    <h2 class="text-center justify-center font-bold italic mt-2">Dark Summoning</h2>
+                    <img src="images/pack3.jpg" alt="Dark Summoning picture" class="w-auto h-2/3">
+                    <p>A theme booster
+                        dedicated to monsters, Dark servants, and forbidden spells.</p>
+                </div>
+                <div>
+                    <h2 class="text-center justify-center font-bold italic mt-2">Lucky Pack</h2>
+                    <img src="images/pack4.jpg" alt="Lucky Pack picture" class="w-auto h-2/3">
+                    <p>A mystery pack with a
+                        random composition and a chance to discover a special card.</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -103,4 +137,4 @@
     </footer>
 </body>
 
-</html># projetMythoria
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HOLLOW KNIGHT. An online card game.">
+    <title>HOLLOW KNIGHT | DESCEND INTO THE DARK</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+        @theme{
+            --color-void: #0b0d14;
+            --color-bone: #e8e4d8;
+            --font-title: "Cinzel", Georgia, serif;
+            --font-body: "Lora", Georgia, serif;
+        }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+</head>
+
+    <header
+        class="relative min-h-[30vh] w-full bg-[url(images/hollowknightheader.jpg)] bg-cover bg-center bg-no-repeat">
+
+        <div class="absolute inset-0 bg-black/30" aria-hidden="true"></div>
+
+        <div class="relative mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4">
+            <a href="index.html" class="flex items-center gap-3 font-title text-xl font-bold tracking-widest">
+                <img src="images/logo.jpg" alt="" width="48" height="48" class="h-12 w-auto">
+                HOLLOW KNIGHT
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="peer sr-only">
+            <label for="menu-toggle"
+                class="cursor-pointer rounded border border-bone/60 px-3 py-2 text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-bone md:hidden">
+                Menu
+            </label>
+
+            <nav aria-label="Main navigation"
+                class="hidden w-full flex-col gap-1 peer-checked:flex md:flex md:w-auto md:flex-row md:gap-6">
+                <a href="index.html" class="border-b-2 border-transparent py-2 hover:border-bone">HOME</a>
+                <a href="shop.html" class="border-b-2 border-bone py-2">BOOSTER SHOP</a>
+                <a href="chamber.html" aria-current="page" class="border-b-2 border-transparent py-2 hover:border-bone">OPENING CHAMBER</a>
+                <a href="grimoire.html" class="border-b-2 border-transparent py-2 hover:border-bone">MY GRIMOIRE</a>
+                <a href="cards.html" class="border-b-2 border-transparent py-2 hover:border-bone">MY DECK</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-12">
+
+        <h1 class="text-center font-title text-4xl font-bold tracking-widest">OPENING CHAMBER</h1>
+        <p class="mx-auto mt-4 max-w-md text-center">Choose a booster and open it to discover your cards.</p>
+
+        <div class="mx-auto mt-10 max-w-2xl rounded-lg bg-blue-950 p-6">
+            <h2 class="font-title text-2xl font-bold">My boosters</h2>
+            <p id="no-booster" class="mt-4">you have no boosters yet.<a href="shop.html" class="underline">buy a booster from the shop.</a></p>
+            <div id="booster-box" class="mt-4 flex flex-col gap-3"></div>
+        </div>
+
+        <div id="special-message" role="status" class="mx-auto mt-8 max-w-2xl text-centre text-xl font-bold"></div>
+        <div id="card-box" class="mt-8 flex fles-wrap justify-center gap-6"></div>
+    </main>
+
+
+

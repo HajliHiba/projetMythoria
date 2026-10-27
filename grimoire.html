@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HOLLOW KNIGHT. Your collection of cards.">
+    <title>MY GRIMOIRE | HOLLOW KNIGHT</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+        @theme {
+            --color-void: #0b0d14;
+            --color-bone: #e8e4d8;
+            --font-title: "Cinzel", Georgia, serif;
+            --font-body: "Lora", Georgia, serif;
+        }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="w-full bg-void font-body text-bone">
+    <header
+        class="relative min-h-[30vh] w-full bg-[url(images/hollowknightheader.jpg)] bg-cover bg-center bg-no-repeat">
+
+        <div class="absolute inset-0 bg-black/30" aria-hidden="true"></div>
+
+        <div class="relative mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4">
+            <a href="index.html" class="flex items-center gap-3 font-title text-xl font-bold tracking-widest">
+                <img src="images/logo.jpg" alt="" width="48" height="48" class="h-12 w-auto">
+                HOLLOW KNIGHT
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="peer sr-only">
+            <label for="menu-toggle"
+                class="cursor-pointer rounded border border-bone/60 px-3 py-2 text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-bone md:hidden">
+                Menu
+            </label>
+
+            <nav aria-label="Main navigation"
+                class="hidden w-full flex-col gap-1 peer-checked:flex md:flex md:w-auto md:flex-row md:gap-6">
+                <a href="index.html" class="border-b-2 border-transparent py-2 hover:border-bone">HOME</a>
+                <a href="shop.html" class="border-b-2 border-transparent py-2 hover:border-bone">BOOSTER SHOP</a>
+                <a href="chamber.html" class="border-b-2 border-transparent py-2 hover:border-bone">OPENING CHAMBER</a>
+                <a href="grimoire.html" aria-current="page" class="border-b-2 border-bone py-2">MY GRIMOIRE</a>
+                <a href="cards.html" class="border-b-2 border-transparent py-2 hover:border-bone">MY DECK</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-12">
+
+        <h1 class="text-center font-title text-4xl font-bold tracking-widest">MY GRIMOIRE</h1>
+        <p id="counter" class="mt-4 text-center"></p>
+        <div id="empty" hidden class="mx-auto mt-10 max-w-md text-center">
+            <p>Your grimoire is empty. Open a booster to find your first cards.</p>
+            <a href="chamber.html"
+                class="mt-6 inline-block rounded-md bg-blue-800 px-8 py-3 font-bold text-white hover:bg-blue-700">Open
+                a booster</a>
+        </div>
+        <div id="grimoire-box">
+            <div class="mt-6 flex justify-center">
+                <div>
+                    <label for="rarity-filter" class="block text-sm">Rarity</label>
+                    <select id="rarity-filter" onchange="applyFilters()"
+                        class="rounded border border-blue-400 bg-blue-950 px-3 py-2">
+                        <option value="all">All rarities</option>
+                        <option value="common">Common</option>
+                        <option value="rare">Rare</option>
+                        <option value="epic">Epic</option>
+                        <option value="legendary">Legendary</option>
+                    </select>
+                </div>
+            </div>
+            <div class="relative mt-6">
+                <div
+                    class="mb-4 flex flex-wrap justify-center gap-2 md:absolute md:left-0 md:top-[13%] md:z-10 md:mb-0 md:w-[13%] md:flex-col md:flex-nowrap md:justify-start">
+                    <button type="button" data-type="all" onclick="setType('all')"
+                        class="tab rounded-md border-2 border-blue-300 bg-blue-900 px-3 py-2 text-xs font-bold text-bone transition hover:bg-blue-800 md:rounded-l-none md:text-sm">All</button>
+                    <button type="button" data-type="hero" onclick="setType('hero')"
+                        class="tab rounded-md border-2 border-blue-300 bg-blue-900 px-3 py-2 text-xs font-bold text-bone transition hover:bg-blue-800 md:rounded-l-none md:text-sm">Heroes</button>
+                    <button type="button" data-type="monster" onclick="setType('monster')"
+                        class="tab rounded-md border-2 border-blue-300 bg-blue-900 px-3 py-2 text-xs font-bold text-bone transition hover:bg-blue-800 md:rounded-l-none md:text-sm">Monsters</button>
+                    <button type="button" data-type="minion" onclick="setType('minion')"
+                        class="tab rounded-md border-2 border-blue-300 bg-blue-900 px-3 py-2 text-xs font-bold text-bone transition hover:bg-blue-800 md:rounded-l-none md:text-sm">Minions</button>
+                    <button type="button" data-type="spell" onclick="setType('spell')"
+                        class="tab rounded-md border-2 border-blue-300 bg-blue-900 px-3 py-2 text-xs font-bold text-bone transition hover:bg-blue-800 md:rounded-l-none md:text-sm">Spells</button>
+                </div>
+                <div
+                    class="relative md:aspect-[1672/941] md:w-full md:bg-[url(images/grimoire-book.webp)] md:bg-cover md:bg-center">
+                    <div
+                        class="rounded-lg bg-amber-100 p-3 md:absolute md:left-[17.9%] md:top-[14.9%] md:h-[70.1%] md:w-[26.3%] md:bg-transparent md:p-0">
+                        <div id="card-grid" class="grid grid-cols-3 gap-2 md:h-full md:grid-rows-3"></div>
+                    </div>
+                    <div id="details" aria-live="polite"
+                        class="mt-4 rounded-lg bg-amber-100 p-4 text-amber-950 md:absolute md:left-[53.8%] md:top-[14.9%] md:mt-0 md:h-[70.1%] md:w-[28.7%] md:overflow-y-auto md:bg-transparent md:p-0">
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 flex items-center justify-center gap-6">
+                <button id="prev-btn" type="button" onclick="changePage(-1)"
+                    class="rounded-md bg-blue-800 px-6 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-40">Previous</button>
+                <p id="page-info"></p>
+                <button id="next-btn" type="button" onclick="changePage(1)"
+                    class="rounded-md bg-blue-800 px-6 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-40">Next</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-bone/20 bg-black/40">
+        <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
+            <div class="flex items-center gap-4">
+                <img src="images/logo.jpg" alt="" width="80" height="80" class="h-20 w-auto">
+                <p class="font-title text-xl font-bold tracking-widest">HOLLOW KNIGHT</p>
+            </div>
+            <nav aria-label="Footer navigation">
+                <h2 class="mb-3 font-title font-bold tracking-widest">EXPLORE</h2>
+                <ul class="flex flex-col gap-2">
+                    <li><a href="index.html" class="hover:underline">HOME</a></li>
+                    <li><a href="shop.html" class="hover:underline">BOOSTER SHOP</a></li>
+                    <li><a href="chamber.html" class="hover:underline">OPENING CHAMBER</a></li>
+                    <li><a href="grimoire.html" class="hover:underline">MY GRIMOIRE</a></li>
+                    <li><a href="cards.html" class="hover:underline">MY DECK</a></li>
+                </ul>
+            </nav>
+            <div>
+                <h2 class="mb-3 font-title font-bold tracking-widest">MADE WITH UNITY</h2>
+                <p>Learn about the methods we used to make Hollow Knight, and about the engine under-pinning the whole
+                    game.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/cards.js"></script>
+    <script>
+        const counter = document.getElementById("counter");
+        const empty = document.getElementById("empty");
+        const grimoireBox = document.getElementById("grimoire-box");
+        const rarityFilter = document.getElementById("rarity-filter");
+        const cardGrid = document.getElementById("card-grid");
+        const details = document.getElementById("details");
+        const prevButton = document.getElementById("prev-btn");
+        const nextButton = document.getElementById("next-btn");
+        const pageInfo = document.getElementById("page-info");
+        const tabs = document.querySelectorAll(".tab");
+
+        const collection = JSON.parse(localStorage.getItem("collection")) || [];
+        const counts = {};
+        for (const id of collection) {
+            if (counts[id]) {
+                counts[id] = counts[id] + 1;
+            } else {
+                counts[id] = 1;
+            }
+        }
+
+        const PER_PAGE = 9;
+        let page = 0;
+        let currentType = "all";
+        let selectedId = "";
+        const TAB_OFF = "tab rounded-md border-2 border-blue-300 bg-blue-900 px-3 py-2 text-xs font-bold text-bone transition hover:bg-blue-800 md:rounded-l-none md:text-sm";
+        const TAB_ON = "tab rounded-md border-2 border-blue-300 bg-blue-600 px-3 py-2 text-xs font-bold text-bone transition md:translate-x-3 md:rounded-l-none md:text-sm";
+
+        function cardHtml(card) {
+            
+            let ring = "";
+            if (card.id === selectedId) {
+                ring = "ring-4 ring-blue-400"; 
+            }
+
+           
+            let badge = "";
+            if (counts[card.id] > 1) {
+                badge = `<span class="absolute right-1 top-1 rounded bg-black/70 px-1 text-[10px]">× ${counts[card.id]}</span>`;
+            }
+
+            return `
+                <button type="button" onclick="selectCard('${card.id}')" aria-pressed="${card.id === selectedId}"
+                    class="relative flex flex-col overflow-hidden rounded-md border-2 ${COLORS[card.rarity]} bg-blue-900 p-1 text-bone hover:bg-blue-800 md:h-full ${ring}">
+                    <img src="images/cards/${card.id}.jpg" alt="" class="aspect-square w-full rounded object-cover md:aspect-auto md:min-h-0 md:flex-1">
+                    <span class="mt-1 block truncate text-[10px] font-bold leading-tight">${card.name}</span>
+                    ${badge}
+                </button>`;
+        }
+
+       
+        function showDetails(card) {
+            if (!card) {
+                details.innerHTML = `<p class="mt-10 text-center italic">No card to show.</p>`;
+                return;
+            }
+
+            details.innerHTML = `
+                <h2 class="text-center font-title text-xl font-bold lg:text-3xl">${card.name}</h2>
+                <img src="images/cards/${card.id}.jpg" alt="${card.name}"
+                    class="mx-auto mt-2 aspect-square w-3/5 rounded-lg border-4 ${COLORS[card.rarity]} object-cover">
+                <p class="mt-2 text-center text-xs italic capitalize lg:text-sm">${TYPE_NAMES[card.type]} - ${card.rarity}</p>
+                <p class="mt-2 rounded-lg bg-blue-900 p-2 text-center text-xs font-bold text-bone lg:text-base">${getInfo(card)}</p>
+                <p class="mt-2 text-center text-xs italic lg:text-base">“${card.description}”</p>
+                <p class="mt-1 text-center text-xs">You own ${counts[card.id]} copy(ies).</p>`;
+        }
+
+       
+        function showGrimoire() {
+        
+            const list = CARDS.filter(function (card) {
+                const isOwned = counts[card.id] > 0;
+                const goodType = currentType === "all" || card.type === currentType;
+                const goodRarity = rarityFilter.value === "all" || card.rarity === rarityFilter.value;
+                return isOwned && goodType && goodRarity;
+            });
+
+           
+            const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+            const start = page * PER_PAGE;
+            const pageCards = list.slice(start, start + PER_PAGE);
+
+         
+            let selectedCard = pageCards.find(function (card) {
+                return card.id === selectedId;
+            });
+            if (!selectedCard) {
+                selectedCard = pageCards[0];
+            }
+            if (selectedCard) {
+                selectedId = selectedCard.id;
+            } else {
+                selectedId = "";
+            }
+
+            // Left page
+            cardGrid.innerHTML = "";
+            if (pageCards.length === 0) {
+                cardGrid.innerHTML = `<p class="col-span-3 mt-10 text-center italic text-amber-950">No card matches these filters.</p>`;
+            }
+            for (const card of pageCards) {
+                cardGrid.innerHTML += cardHtml(card);
+            }
+
+            // Right page
+            showDetails(selectedCard);
+
+           
+            pageInfo.textContent = "Page " + (page + 1) + " / " + totalPages;
+            prevButton.disabled = page === 0;
+            nextButton.disabled = page >= totalPages - 1;
+
+            for (const tab of tabs) {
+                if (tab.dataset.type === currentType) {
+                    tab.className = TAB_ON;
+                    tab.setAttribute("aria-pressed", "true");
+                } else {
+                    tab.className = TAB_OFF;
+                    tab.setAttribute("aria-pressed", "false");
+                }
+            }
+        }
+
+      
+        function selectCard(id) {
+            selectedId = id;
+            showGrimoire();
+        }
+
+        function changePage(change) { 
+            page = page + change;
+            showGrimoire();
+        }
+
+        function setType(type) { 
+            currentType = type;
+            page = 0;
+            showGrimoire();
+        }
+
+        function applyFilters() {
+            page = 0;
+            showGrimoire();
+        }
+
+        
+        const discovered = Object.keys(counts).length;
+        counter.textContent = "Cards discovered: " + discovered + " / " + CARDS.length;
+
+        if (collection.length === 0) {
+          
+            empty.hidden = false;
+            grimoireBox.hidden = true;
+        } else {
+            showGrimoire();
+        }
+    </script>
+</body>
+
+</html>
+
+

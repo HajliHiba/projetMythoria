@@ -151,7 +151,7 @@
                     </div>
                 </article>
             </section>
-            
+
             <aside class="h-fit rounded-lg border border-bone/20 bg-blue-900 p-5 lg:sticky lg:top-6"
                 aria-labelledby="cart-title">
                 <h2 id="cart-title" class="font-title text-2xl font-bold">My cart</h2>
@@ -216,7 +216,6 @@
             cart.forEach(function (item, index) {
                 const lineTotal = item.price * item.quantity;
                 total = total + lineTotal;
-
                 cartList.innerHTML += `
                     <li class="flex items-center justify-between gap-2 border-b border-bone/20 py-2">
                         <span>${item.quantity} × ${item.name}</span>
@@ -266,6 +265,18 @@
                 message.textContent = "Your cart is empty.";
                 return;
             }
+
+            const owned = JSON.parse(localStorage.getItem("ownedBoosters")) || [];
+            cart.forEach(function (item) {
+                const line = owned.find(function (o) { return o.name === item.name; });
+                if (line) {
+                    line.quantity = line.quantity: item.quantity;
+                } else {
+                    owned.push({ name: item.name, quantity: item.quantity });
+                }
+            });
+            localStorage.setItem("ownedBoosters", JSON.stringify(owned));
+
             const total = cartTotal.textContent;
             cart = [];
             saveCart();
@@ -274,4 +285,5 @@
         showCart();
     </script>
 </body>
+
 </html>

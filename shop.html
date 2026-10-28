@@ -270,7 +270,7 @@
             cart.forEach(function (item) {
                 const line = owned.find(function (o) { return o.name === item.name; });
                 if (line) {
-                    line.quantity = line.quantity: item.quantity;
+                    line.quantity = line.quantity + item.quantity;
                 } else {
                     owned.push({ name: item.name, quantity: item.quantity });
                 }

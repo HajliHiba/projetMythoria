@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HOLLOW KNIGHT. An online card game.">
+    <title>MYTHORIA | DESCEND INTO THE DARK</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+        @theme{
+            --color-void: #0b0d14;
+            --color-bone: #e8e4d8;
+            --font-title: "Cinzel", Georgia, serif;
+            --font-body: "Lora", Georgia, serif;
+        }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+</head>
+<body class="flex h-screen flex-col overflow-hidden bg-void bg-[url(assets/images/arena-background.jpg)] bg-cover bg-center bg-no-repeat font -body text-bone"></body>
+    <header
+        class="flex items-center justify-between bg-black/40 px-4 py-2">
+            <a href="index.html" class="flex items-center gap-3 font-title text-xl font-bold tracking-widest">
+                <img src="images/logo.jpg" alt="" width="48" height="48" class="h-12 w-auto">
+                MYTHORIA
+            </a>
+
+            <h1 class="font-title text-xl font-bold tracking-widest">ARENA</h1>
+            <label for="menu-toggle"
+                class="cursor-pointer rounded border border-white/60 px-3 py-2 text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-white md:hidden">
+                Menu
+            </label>
+
+            <nav aria-label="Main navigation"
+                class="hidden w-full flex-col gap-1 peer-checked:flex md:flex md:w-auto md:flex-row md:gap-6">
+                <a href="index.html" class="border-b-2 border-transparent py-2 hover:border-white">HOME</a>
+                <a href="shop.html" class="border-b-2 border-transparent py-2 hover:border-white">BOOSTER SHOP</a>
+                <a href="chamber.html" aria-current="page" class="border-b-2 border-white py-2">OPENING CHAMBER</a>
+                <a href="grimoire.html" class="border-b-2 border-transparent py-2 hover:border-white">MY GRIMOIRE</a>
+                <a href="cards.html" class="border-b-2 border-transparent py-2 hover:border-white">MY DECK</a>
+            </nav>
+    </header>
+    <main class="mx-auto flex min-h-0 w-full max-w-5xl flex-1 gap-2 p-2">
+        <section class="flex min-w-0 flex-1 flex-col gap-2">
+            <h2 class="sr-only">opponent</h2>
+            <div class="flex justify-center gap-1 md:gap-2">
+                <img src="images/card-back.jpg" alt="opponent card, face down" width="400" height="560" class="h-12 w-9 rounded-lg object-cover md:h-14 md:w-10 lg:h-16 lg:w-12">
+                <img src="images/card-back.jpg" alt="opponent card, face down" width="400" height="560" class="h-12 w-9 rounded-lg object-cover md:h-14 md:w-10 lg:h-16 lg:w-12">
+                <img src="images/card-back.jpg" alt="opponent card, face down" width="400" height="560" class="h-12 w-9 rounded-lg object-cover md:h-14 md:w-10 lg:h-16 lg:w-12">
+                <img src="images/card-back.jpg" alt="opponent card, face down" width="400" height="560" class="h-12 w-9 rounded-lg object-cover md:h-14 md:w-10 lg:h-16 lg:w-12">
+                <img src="images/card-back.jpg" alt="opponent card, face down" width="400" height="560" class="h-12 w-9 rounded-lg object-cover md:h-14 md:w-10 lg:h-16 lg:w-12">
+            </div>
+            <div class="flex items-center gap-2 text-sm">
+                <p class="shrink-0">Opponent</p>
+                <div class="h-3 w-full rounded bg-gray-700/70">
+                    <div class="h-3 w-full rounded bg-red-600"></div>
+                </div>
+                <p class="shrink-0">3000</p>
+            </div>
+            <h2 class="sr-only">Battlefield</h2>
+            <div class="flex min-h-0 flex-1 flex-col gap-1">
+                <div class="grid min-h-0 flex-1 grid-cols-5 gap-1">
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                </div>
+                <div class="grid min-h-0 flex-1 grid-cols-5 gap-1">
+                    <div class="relative overflow-hidden rounded border-2 border-bone/40 bg-white/10">
+                        <img src="images/shell-crawler.jpg" alt="Shell Crawler" width="400" height="560" class="absolute inset-0 h-full w-full object-contain">
+                    </div>
+                    <div class="relative overflow-hidden rounded border-2 border-bone/40 bg-white/10">
+                        <img src="images/husk-brute.jpg" alt="Husk Brute" width="400" height="560" class="absolute inset-0 h-full w-full object-contain">
+                    </div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                </div>
+                <div class="flex items-center justify-center rounded border border-bone/40 bg-black/30 px-2 py-1">
+                    <button type="button" class="rounded-md bg-blue-800 px-4 py-1 text-sm font-bold text-white hover:bg-blue-700">End turn</button>
+                </div>
+                <div class="grid min-h-0 flex-1 grid-cols-5 gap-1">
+                    <div class="relative overflow-hidden rounded border-2 border-bone/40 bg-white/10">
+                        <img src="images/lone-wanderer.jpg" alt="Lone Wanderer" width="400" height="560" class="absolute inset-0 h-full w-full object-contain">
+                    </div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                </div>
+                <div class="grid min-h-0 flex-1 grid-cols-5 gap-1">
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                    <div class="rounded border-2 border-bone/40 bg-white/10"></div>
+                </div>
+            </div>
+            <h2 class="sr-only">You</h2>
+            <div class="flex items-center gap-2 text-sm">
+                <p class="shrink-0">You</p>
+                <div class="h-3 flex-1 rounded bg-gray-700/70">
+                    <div class="h-3 w-full rounded bg-green-600"></div>
+                </div>
+                <p class="shrink-0">3000</p>
+            </div>
+            <div class="flex justify-center gap-1 md:gap-2">
+                <img src="images/lantern-squire.jpg" alt="Lantern Squire" width="400" height="560" class="h-20 w-12 rounded-lg object-cover md:w-14 lg:h-28 lg:w-20">
+                <img src="images/moss-sprite.jpg" alt="Moss Sprite" width="400" height="560" class="h-20 w-12 rounded-lg object-cover md:w-14 lg:h-28 lg:w-20">
+                <img src="images/soul-spark.jpg" alt="Soul Spark" width="400" height="560" class="h-20 w-12 rounded-lg object-cover md:w-14 lg:h-28 lg:w-20">
+                <img src="images/pale-knight.jpg" alt="Pale Knight" width="400" height="560" class="h-20 w-12 rounded-lg object-cover md:w-14 lg:h-28 lg:w-20">
+                <img src="images/seren.jpg" alt="Seren" width="400" height="560" class="h-20 w-12 rounded-lg object-cover md:w-14 lg:h-28 lg:w-20">
+            </div>
+        </section>
+        <div class="flex w-24 shrink-0 flex-col justify-between md:w-40 lg:w-56">
+            <div class="flex flex-col items-center gap-1 text-center">
+                <img src="images/card-back.jpg" alt="Opponent deck" width="400" height="560" class="h-24 w-auto rounded-lg lg:h-36">
+                <p class="rounded bg-black/40 px-2 text-xs">Opponent deck</p>
+            </div>
+            <div class="flex flex-col items-center gap-1 text-center">
+                <img src="images/card-back.jpg" alt="My deck" width="400" height="560" class="h-24 w-auto rounded-lg lg:h-36">
+                <p class="rounded bg-black/40 px-2 text-xs">My deck</p>
+                <button type="button" class="rounded-md bg-blue-800 px-2 py-1 text-xs font-bold text-white hover:bg-blue-700">Add to hand</button>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="HOLLOW KNIGHT. Your collection of cards.">
-    <title>MY GRIMOIRE | HOLLOW KNIGHT</title>
+    <title>MY GRIMOIRE | MYTHORIA</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 
     <style type="text/tailwindcss">
         @theme {
@@ -33,7 +34,7 @@
         <div class="relative mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4">
             <a href="index.html" class="flex items-center gap-3 font-title text-xl font-bold tracking-widest">
                 <img src="images/logo.jpg" alt="" width="48" height="48" class="h-12 w-auto">
-                HOLLOW KNIGHT
+                MYTHORIA
             </a>
 
             <input type="checkbox" id="menu-toggle" class="peer sr-only">
@@ -116,7 +117,7 @@
         <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
             <div class="flex items-center gap-4">
                 <img src="images/logo.jpg" alt="" width="80" height="80" class="h-20 w-auto">
-                <p class="font-title text-xl font-bold tracking-widest">HOLLOW KNIGHT</p>
+                <p class="font-title text-xl font-bold tracking-widest">MYTHORIA</p>
             </div>
             <nav aria-label="Footer navigation">
                 <h2 class="mb-3 font-title font-bold tracking-widest">EXPLORE</h2>
@@ -136,7 +137,7 @@
         </div>
     </footer>
 
-    <script src="js/cards.js"></script>
+    <script src="cards.js"></script>
     <script>
         const counter = document.getElementById("counter");
         const empty = document.getElementById("empty");
@@ -167,13 +168,13 @@
         const TAB_ON = "tab rounded-md border-2 border-blue-300 bg-blue-600 px-3 py-2 text-xs font-bold text-bone transition md:translate-x-3 md:rounded-l-none md:text-sm";
 
         function cardHtml(card) {
-            
+
             let ring = "";
             if (card.id === selectedId) {
-                ring = "ring-4 ring-blue-400"; 
+                ring = "ring-4 ring-blue-400";
             }
 
-           
+
             let badge = "";
             if (counts[card.id] > 1) {
                 badge = `<span class="absolute right-1 top-1 rounded bg-black/70 px-1 text-[10px]">× ${counts[card.id]}</span>`;
@@ -182,13 +183,13 @@
             return `
                 <button type="button" onclick="selectCard('${card.id}')" aria-pressed="${card.id === selectedId}"
                     class="relative flex flex-col overflow-hidden rounded-md border-2 ${COLORS[card.rarity]} bg-blue-900 p-1 text-bone hover:bg-blue-800 md:h-full ${ring}">
-                    <img src="images/cards/${card.id}.jpg" alt="" class="aspect-square w-full rounded object-cover md:aspect-auto md:min-h-0 md:flex-1">
+                    <img src="images/${card.id}.jpg" alt="" class="aspect-square w-full rounded object-cover md:aspect-auto md:min-h-0 md:flex-1">
                     <span class="mt-1 block truncate text-[10px] font-bold leading-tight">${card.name}</span>
                     ${badge}
                 </button>`;
         }
 
-       
+
         function showDetails(card) {
             if (!card) {
                 details.innerHTML = `<p class="mt-10 text-center italic">No card to show.</p>`;
@@ -197,7 +198,7 @@
 
             details.innerHTML = `
                 <h2 class="text-center font-title text-xl font-bold lg:text-3xl">${card.name}</h2>
-                <img src="images/cards/${card.id}.jpg" alt="${card.name}"
+                <img src="images/${card.id}.jpg" alt="${card.name}"
                     class="mx-auto mt-2 aspect-square w-3/5 rounded-lg border-4 ${COLORS[card.rarity]} object-cover">
                 <p class="mt-2 text-center text-xs italic capitalize lg:text-sm">${TYPE_NAMES[card.type]} - ${card.rarity}</p>
                 <p class="mt-2 rounded-lg bg-blue-900 p-2 text-center text-xs font-bold text-bone lg:text-base">${getInfo(card)}</p>
@@ -205,9 +206,9 @@
                 <p class="mt-1 text-center text-xs">You own ${counts[card.id]} copy(ies).</p>`;
         }
 
-       
+
         function showGrimoire() {
-        
+
             const list = CARDS.filter(function (card) {
                 const isOwned = counts[card.id] > 0;
                 const goodType = currentType === "all" || card.type === currentType;
@@ -215,12 +216,12 @@
                 return isOwned && goodType && goodRarity;
             });
 
-           
+
             const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
             const start = page * PER_PAGE;
             const pageCards = list.slice(start, start + PER_PAGE);
 
-         
+
             let selectedCard = pageCards.find(function (card) {
                 return card.id === selectedId;
             });
@@ -233,7 +234,7 @@
                 selectedId = "";
             }
 
-            // Left page
+
             cardGrid.innerHTML = "";
             if (pageCards.length === 0) {
                 cardGrid.innerHTML = `<p class="col-span-3 mt-10 text-center italic text-amber-950">No card matches these filters.</p>`;
@@ -242,10 +243,10 @@
                 cardGrid.innerHTML += cardHtml(card);
             }
 
-            // Right page
+
             showDetails(selectedCard);
 
-           
+
             pageInfo.textContent = "Page " + (page + 1) + " / " + totalPages;
             prevButton.disabled = page === 0;
             nextButton.disabled = page >= totalPages - 1;
@@ -261,18 +262,18 @@
             }
         }
 
-      
+
         function selectCard(id) {
             selectedId = id;
             showGrimoire();
         }
 
-        function changePage(change) { 
+        function changePage(change) {
             page = page + change;
             showGrimoire();
         }
 
-        function setType(type) { 
+        function setType(type) {
             currentType = type;
             page = 0;
             showGrimoire();
@@ -283,12 +284,12 @@
             showGrimoire();
         }
 
-        
+
         const discovered = Object.keys(counts).length;
         counter.textContent = "Cards discovered: " + discovered + " / " + CARDS.length;
 
         if (collection.length === 0) {
-          
+
             empty.hidden = false;
             grimoireBox.hidden = true;
         } else {
@@ -298,5 +299,3 @@
 </body>
 
 </html>
-
-

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HOLLOW KNIGHT. Build your deck.">
+    <title>MY DECK | HOLLOW KNIGHT</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+        @theme {
+            --color-void: #0b0d14;
+            --color-bone: #e8e4d8;
+            --font-title: "Cinzel", Georgia, serif;
+            --font-body: "Lora", Georgia, serif;
+        }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="w-full bg-void font-body text-bone">
+    <header
+        class="relative min-h-[30vh] w-full bg-[url(images/hollowknightheader.jpg)] bg-cover bg-center bg-no-repeat">
+
+        <div class="absolute inset-0 bg-black/30" aria-hidden="true"></div>
+
+        <div class="relative mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4">
+            <a href="index.html" class="flex items-center gap-3 font-title text-xl font-bold tracking-widest">
+                <img src="images/logo.jpg" alt="" width="48" height="48" class="h-12 w-auto">
+                HOLLOW KNIGHT
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="peer sr-only">
+            <label for="menu-toggle"
+                class="cursor-pointer rounded border border-bone/60 px-3 py-2 text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-bone md:hidden">
+                Menu
+            </label>
+
+            <nav aria-label="Main navigation"
+                class="hidden w-full flex-col gap-1 peer-checked:flex md:flex md:w-auto md:flex-row md:gap-6">
+                <a href="index.html" class="border-b-2 border-transparent py-2 hover:border-bone">HOME</a>
+                <a href="shop.html" class="border-b-2 border-transparent py-2 hover:border-bone">BOOSTER SHOP</a>
+                <a href="chamber.html" class="border-b-2 border-transparent py-2 hover:border-bone">OPENING CHAMBER</a>
+                <a href="grimoire.html" class="border-b-2 border-transparent py-2 hover:border-bone">MY GRIMOIRE</a>
+                <a href="cards.html" aria-current="page" class="border-b-2 border-bone py-2">MY DECK</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-12">
+
+        <h1 class="text-center font-title text-4xl font-bold tracking-widest">MY DECK</h1>
+        <p class="mx-auto mt-4 max-w-xl text-center">
+            Rule: a deck can contain only ONE copy of each card, even if you own several copies.
+            A deck has <span id="max-text"></span> cards at most.
+        </p>
+
+        <p id="message" role="status" class="mt-4 text-center font-bold text-yellow-400"></p>
+
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+ 
+            <div class="rounded-lg bg-blue-950 p-5">
+                <h2 class="font-title text-2xl font-bold">My cards</h2>
+
+                <p id="no-cards" hidden class="mt-4">You have no card yet. <a href="chamber.html"
+                        class="underline">Open a booster</a>.</p>
+
+                <div id="collection-list" class="mt-4 flex flex-col gap-3"></div>
+            </div>
+
+            <div class="rounded-lg bg-blue-950 p-5">
+                <h2 class="font-title text-2xl font-bold">My deck (<span id="deck-count">0</span> / <span
+                        id="deck-max"></span>)</h2>
+
+                <p id="no-deck" class="mt-4">Your deck is empty. Add cards from the left.</p>
+
+                <div id="deck-list" class="mt-4 flex flex-col gap-3"></div>
+
+                <div class="mt-6 rounded-lg bg-blue-900 p-4">
+                    <h3 class="font-title text-xl font-bold">Deck statistics</h3>
+                    <div id="stats" class="mt-2"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-bone/20 bg-black/40">
+        <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
+            <div class="flex items-center gap-4">
+                <img src="images/logo.jpg" alt="" width="80" height="80" class="h-20 w-auto">
+                <p class="font-title text-xl font-bold tracking-widest">HOLLOW KNIGHT</p>
+            </div>
+            <nav aria-label="Footer navigation">
+                <h2 class="mb-3 font-title font-bold tracking-widest">EXPLORE</h2>
+                <ul class="flex flex-col gap-2">
+                    <li><a href="index.html" class="hover:underline">HOME</a></li>
+                    <li><a href="shop.html" class="hover:underline">BOOSTER SHOP</a></li>
+                    <li><a href="chamber.html" class="hover:underline">OPENING CHAMBER</a></li>
+                    <li><a href="grimoire.html" class="hover:underline">MY GRIMOIRE</a></li>
+                    <li><a href="cards.html" class="hover:underline">MY DECK</a></li>
+                </ul>
+            </nav>
+            <div>
+                <h2 class="mb-3 font-title font-bold tracking-widest">MADE WITH UNITY</h2>
+                <p>Learn about the methods we used to make Hollow Knight, and about the engine under-pinning the whole
+                    game.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/cards.js"></script>
+    <script>
+        const MAX_DECK = 10;
+
+        const collectionList = document.getElementById("collection-list");
+        const deckList = document.getElementById("deck-list");
+        const noCards = document.getElementById("no-cards");
+        const noDeck = document.getElementById("no-deck");
+        const deckCount = document.getElementById("deck-count");
+        const stats = document.getElementById("stats");
+        const message = document.getElementById("message");
+
+        const collection = JSON.parse(localStorage.getItem("collection")) || [];
+        let deck = JSON.parse(localStorage.getItem("deck")) || [];
+
+        document.getElementById("max-text").textContent = MAX_DECK;
+        document.getElementById("deck-max").textContent = MAX_DECK;
+
+        function findCard(id) {
+            return CARDS.find(function (card) {
+                return card.id === id;
+            });
+        }
+
+        function addToDeck(id) {
+            if (deck.length >= MAX_DECK) {
+                message.textContent = "The deck is full (" + MAX_DECK + " cards). Remove a card first.";
+                return;
+            }
+            if (deck.includes(id)) {
+                message.textContent = "This card is already in your deck.";
+                return;
+            }
+
+            deck.push(id);
+            localStorage.setItem("deck", JSON.stringify(deck));
+            message.textContent = "";
+            showAll();
+        }
+
+        function removeFromDeck(id) {
+            deck = deck.filter(function (cardId) {
+                return cardId !== id;
+            });
+            localStorage.setItem("deck", JSON.stringify(deck));
+            message.textContent = "";
+            showAll();
+        }
+
+        function showCollection() {
+            collectionList.innerHTML = "";
+            let ownedCount = 0;
+
+            for (const card of CARDS) {
+                if (collection.includes(card.id)) {
+                    ownedCount = ownedCount + 1;
+
+                    let buttonText = "Add";
+                    let disabled = "";
+                    if (deck.includes(card.id)) {
+                        buttonText = "In deck";
+                        disabled = "disabled";
+                    }
+
+                    collectionList.innerHTML += `
+                        <div class="flex items-center gap-3 rounded-lg border-2 ${COLORS[card.rarity]} bg-blue-900 p-2">
+                            <img src="images/cards/${card.id}.jpg" alt="" class="h-16 w-12 rounded object-cover">
+                            <div class="flex-1">
+                                <p class="font-bold">${card.name}</p>
+                                <p class="text-xs italic">${card.type} - ${card.rarity}</p>
+                                <p class="text-xs">${getInfo(card)}</p>
+                            </div>
+                            <button type="button" onclick="addToDeck('${card.id}')" ${disabled}
+                                class="rounded-md bg-blue-800 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-40">${buttonText}</button>
+                        </div>`;
+                }
+            }
+
+            noCards.hidden = ownedCount > 0;
+        }
+
+        function showDeck() {
+            deckList.innerHTML = "";
+
+            for (const id of deck) {
+                const card = findCard(id);
+
+                deckList.innerHTML += `
+                    <div class="flex items-center gap-3 rounded-lg border-2 ${COLORS[card.rarity]} bg-blue-900 p-2">
+                        <img src="images/cards/${card.id}.jpg" alt="" class="h-16 w-12 rounded object-cover">
+                        <div class="flex-1">
+                            <p class="font-bold">${card.name}</p>
+                            <p class="text-xs">${getInfo(card)}</p>
+                        </div>
+                        <button type="button" onclick="removeFromDeck('${card.id}')" aria-label="Remove ${card.name} from the deck"
+                            class="rounded-md border border-bone/50 px-4 py-2 hover:bg-black/30">Remove</button>
+                    </div>`;
+            }
+
+            deckCount.textContent = deck.length;
+            noDeck.hidden = deck.length > 0;
+        }
+
+        function showStats() {
+            let attackTotal = 0;
+            let healthTotal = 0;
+            let creatures = 0;
+            const types = { hero: 0, monster: 0, minion: 0, spell: 0 };
+
+            for (const id of deck) {
+                const card = findCard(id);
+                types[card.type] = types[card.type] + 1;
+
+                if (card.type !== "spell") {
+                    attackTotal = attackTotal + card.attack;
+                    healthTotal = healthTotal + card.health;
+                    creatures = creatures + 1;
+                }
+            }
+
+            let averageAttack = 0;
+            let averageHealth = 0;
+            if (creatures > 0) {
+                averageAttack = (attackTotal / creatures).toFixed(1);
+                averageHealth = (healthTotal / creatures).toFixed(1);
+            }
+
+            stats.innerHTML = `
+                <p>Cards: ${deck.length} / ${MAX_DECK}</p>
+                <p>Heroes: ${types.hero} - Monsters: ${types.monster}</p>
+                <p>Minions: ${types.minion} - Spells: ${types.spell}</p>
+                <p>Average attack: ${averageAttack}</p>
+                <p>Average health: ${averageHealth}</p>`;
+        }
+
+        function showAll() {
+            showCollection();
+            showDeck();
+            showStats();
+        }
+
+        showAll();
+    </script>
+</body>
+
+</html>
